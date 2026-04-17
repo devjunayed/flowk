@@ -24,3 +24,25 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+/* Auth pages hide the navbar */
+.auth-page ~ nav,
+body:has(.auth-page) nav {
+  display: none;
+}
+ 
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(93, 202, 165, 0.2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(93, 202, 165, 0.35); }
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} 

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="56" height="56">
+  <!-- Icon mark: rounded square background -->
+  <rect x="0" y="0" width="56" height="56" rx="14" fill="#0F6E56"/>
+  <!-- Upward arrow triangle -->
+  <polygon points="28,10 43,33 13,33" fill="white"/>
+  <!-- Balance dot -->
+  <circle cx="28" cy="44" r="5" fill="#5DCAA5"/>
+</svg>

@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  name      String?
+  password  String
+  currency  String    @default("BDT")
+  theme     String    @default("light")
+  createdAt DateTime  @default(now())
+  incomes   Income[]
+  expenses  Expense[]
+  debts     Debt[]
+}
+
+model Income {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  amount    Float
+  category  String
+  note      String?
+  date      DateTime
+  createdAt DateTime @default(now())
+}
+
+model Expense {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  amount    Float
+  category  String
+  note      String?
+  date      DateTime
+  debtId    String? // optional — tags this expense as debt-funded
+  debt      Debt?    @relation(fields: [debtId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Debt {
+  id           String     @id @default(cuid())
+  userId       String
+  user         User       @relation(fields: [userId], references: [id])
+  personName   String
+  amount       Float
+  paidAmount   Float      @default(0)
+  description  String?
+  borrowedDate DateTime
+  dueDate      DateTime?
+  status       DebtStatus @default(UNPAID)
+  createdAt    DateTime   @default(now())
+  expenses     Expense[] // all expenses funded by this debt
+}
+
+enum DebtStatus {
+  UNPAID
+  PARTIAL
+  PAID
+}
